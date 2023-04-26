@@ -6,22 +6,21 @@ public class Board {
     public Board() {
     }
 
-    void setBoard(int r, int c) {
-        row = r;
-        column = c;
+    void IniBoard(int row, int column) {//iniciamos el tablero con el numero de filas y columnas elegido
+
         array = new String[row][column];
 
-        for(int i = 0; i < row; ++i) {
-            for(int j = 0; j < column; ++j) {
+        for(int i = 0; i < row; ++i) { //recorremos filas
+            for(int j = 0; j < column; ++j) { //recorremos columnas
                 array[i][j] = " ";
             }
         }
 
     }
 
-    void printBoard() {
+    void printBoard() { //imprimimos tablero
         System.out.print("\n  | ");
-
+        //imprimimos numeros de las columnas
         int i;
         for(i = 1; i <= row; ++i) {
             System.out.print("" + i + " ");
@@ -44,29 +43,29 @@ public class Board {
 
     String getCell(int i, int j) {
         return array[i][j];
-    }
+    } //obtener una celda especifica
 
-    boolean isEmpty(int r, int c) {
-        return getCell(r, c).equals(" ");
-    }
+    boolean isEmpty(int row, int column) {
+        return getCell(row, column).equals(" ");
+    } //saber si la celda esta vacia
 
-    boolean isOver(int modo, Jugador jugador) {
-        if (modo ==1){
-            if(jugador.score > 0){
+    boolean gameOver(int modo, Jugador jugador) { //saber si termino el juego
+        if (modo == '1') { //modo simple
+            if (jugador.puntaje > 0) {
 
                 return false;
             }
         }
-        else {
-            for(int i = 0; i < column; ++i) {
-                for(int j = 0; j < row; ++j) {
+        else { //modo general
+            for (int i = 0; i < column; ++i) {
+                for (int j = 0; j < row; ++j) {
                     if (isEmpty(i, j)) {
                         return false;
                     }
                 }
             }
-        }
 
-        return true;
+        }
+    return true;
     }
 }

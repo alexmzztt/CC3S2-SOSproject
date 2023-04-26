@@ -34,9 +34,7 @@ public class SOS {
                 check.secondChance = false;
                 oneTurn(player2, check);
             }
-
         }
-
 
         static void start () {
             Board board = new Board();

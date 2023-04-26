@@ -4,6 +4,11 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 public class BoardGUI extends JFrame {
 
     public static int CELL_SIZE = 100;
@@ -18,18 +23,20 @@ public class BoardGUI extends JFrame {
     private JRadioButton simpleGameRadioButton;
     private JRadioButton generalGameRadioButton;
     private JPanel mainPanel;
-    private JTextField textField1;
-    private JRadioButton sRadioButton;
-    private JRadioButton oRadioButton;
-    private JRadioButton sRadioButton1;
-    private JRadioButton oRadioButton1;
+    private JTextField textBoardSize;
+    private JRadioButton sRadioButtonBlue;
+    private JRadioButton oRadioButtonBlue;
+    private JRadioButton sRadioButtonRed;
+    private JRadioButton oRadioButtonRed;
     private JButton newGameButton;
     private JPanel auxPanel;
 
     private GameBoardCanvas gameBoardCanvas;
     private GameBoardCanvas boardPanel;
+    private SosGame game;
 
-    public BoardGUI() {
+    public BoardGUI(SosGame game) {
+        this.game = game;
         setContentPane(mainPanel);
         setSize(720, 540);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -43,6 +50,22 @@ public class BoardGUI extends JFrame {
         auxPanel.setLayout(new GridLayout(1, 1));
         boardPanel = new GameBoardCanvas();
         auxPanel.add(boardPanel);
+        newGameButton = new JButton();
+        sRadioButtonBlue = new JRadioButton();
+        sRadioButtonRed = new JRadioButton();
+        textBoardSize = new JTextField();
+    }
+    private void $$$setupUI$$$ () {
+        newGameButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                try {
+                    game.setBoardSize(textBoardSize.getText());
+                } catch(Exception exception) {
+
+                }
+            }
+        });
     }
 
 //    private void setContentPane(){
@@ -69,9 +92,22 @@ public class BoardGUI extends JFrame {
                     b.addMouseListener(new MouseAdapter() {
                         @Override
                         public void mouseClicked(MouseEvent e) {
-                            b.setLabel("s");
                             b.setEnabled(false);
-                            System.out.println(b.getName());
+                            String xy[] = b.getName().split(" ");
+                            int x = Integer.parseInt(xy[0]);
+                            int y = Integer.parseInt(xy[1]);
+                            game.makeMove(x, y);
+                            b.setLabel(game.getCurrentMove());
+                            if (sRadioButtonBlue.isSelected()) {
+                                game.setMove(SosGame.Cell.S);
+                            } else {
+                                game.setMove(SosGame.Cell.O);
+                            }
+                            if(sRadioButtonRed.isSelected()) {
+                                game.setMove((SosGame.Cell.S));
+                            } else {
+                                game.setMove(SosGame.Cell.O);
+                            }
                         }
                     });
                     add(b);
@@ -88,7 +124,7 @@ public class BoardGUI extends JFrame {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                new BoardGUI();
+                new BoardGUI(new SosGame());
             }
         });
     }

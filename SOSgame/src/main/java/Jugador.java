@@ -1,10 +1,11 @@
 import java.util.Scanner;
 
     public class Jugador {
+        public static Jugador jugador;
         public int score = 0;
         Scanner scan;
 
-        public void Jugador() {
+        public void Jugador () {
 
             scan = new Scanner(System.in);
         }

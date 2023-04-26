@@ -69,7 +69,7 @@ public class Revisar {
         return count;
     }
 
-    int incScore(Jugador jugador) {
+    int incScore() {
         int count = 0;
         int score = 0;
         count = horizontalCheck(count);
@@ -78,7 +78,7 @@ public class Revisar {
         if (count > sosNum) {
             score = count - sosNum;
             sosNum = count;
-            secondChance = !board.isOver(modo, jugador);
+            secondChance = !board.isOver(modo, Jugador.jugador);
         }
 
         return score;

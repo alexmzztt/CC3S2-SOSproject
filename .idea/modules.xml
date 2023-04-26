@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/CC3S2-SOSproject.iml" filepath="$PROJECT_DIR$/.idea/CC3S2-SOSproject.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SOSgame/SOSgame.iml" filepath="$PROJECT_DIR$/SOSgame/SOSgame.iml" />
+    </modules>
+  </component>
+</project>

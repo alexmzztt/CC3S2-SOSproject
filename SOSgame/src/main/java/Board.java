@@ -53,7 +53,7 @@ public class Board {
     boolean isOver(int modo, Jugador jugador) {
         if (modo ==1){
             if(jugador.score > 0){
-                System.out.println("hola gaaaa");
+
                 return false;
             }
         }

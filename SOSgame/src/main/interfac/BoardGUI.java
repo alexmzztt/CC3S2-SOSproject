@@ -1,4 +1,4 @@
-import javax.swing.*;
+/*import javax.swing.*;
 import java.awt.*;
 
 import java.awt.event.MouseAdapter;
@@ -92,4 +92,4 @@ public class BoardGUI extends JFrame {
             }
         });
     }
-}
+}*/

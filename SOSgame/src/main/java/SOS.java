@@ -1,8 +1,7 @@
 import java.util.Scanner;
 
 public class SOS {
-    public SOS() {
-    }
+
 
     static void showStatus(Jugador player1, Jugador player2) {
         System.out.println("Puntaje del jugador 1   : " + player1.score);
@@ -27,14 +26,8 @@ public class SOS {
             check.secondChance = false;
             oneTurn(player1, check);
 
-        } else {
-            player2.play(check);
-            check.board.printBoard();
-            if (check.secondChance) {
-                check.secondChance = false;
-                oneTurn(player2, check);
-            }
         }
+    }
 
         static void start () {
             Board board = new Board();
@@ -71,5 +64,5 @@ public class SOS {
 
             showWinner(player1, player2);
         }
-    }
+
 }

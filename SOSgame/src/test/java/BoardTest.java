@@ -1,5 +1,10 @@
 import static org.junit.Assert.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -12,9 +17,35 @@ class BoardTest {
     @After
     void tearDown() {
     }
+
+
     @Test
-    void testConfig() {}
-    Board board = new Board();
+    void testMode() {
+
+    }
+
+    // AC 1.2 Elección de tamaño de tablero válido
+    @Test
+    void testValidSize() {
+        Board board = new Board();
+        board.setSize(3);
+        assertEquals(board.getSize(), 3);
+    }
+
+    // AC 1.3 Elección de tamaño de tablero inválido
+    @Test
+    void testInvalidSize() {
+        Board board = new Board();
+        Throwable exception = assertThrows(
+                IllegalArgumentException.class,
+                () -> { board.setSize(2); });
+        assertEquals("Debe elegir un número entero mayor o igual a tres",
+                exception.getMessage());
+    }
+
+    @Test
+    void
+
 
 
     // AC 3.1 Comienzo de un nuevo juego exitoso

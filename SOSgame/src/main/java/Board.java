@@ -7,13 +7,13 @@ public class Board {
     }
 
     void setBoard(int r, int c) {
-        this.row = r;
-        this.column = c;
-        this.array = new String[this.row][this.column];
+        row = r;
+        column = c;
+        array = new String[row][column];
 
-        for(int i = 0; i < this.row; ++i) {
-            for(int j = 0; j < this.column; ++j) {
-                this.array[i][j] = " ";
+        for(int i = 0; i < row; ++i) {
+            for(int j = 0; j < column; ++j) {
+                array[i][j] = " ";
             }
         }
 
@@ -23,17 +23,17 @@ public class Board {
         System.out.print("\n  | ");
 
         int i;
-        for(i = 1; i <= this.row; ++i) {
+        for(i = 1; i <= row; ++i) {
             System.out.print("" + i + " ");
         }
 
         System.out.println("\n--------------------------");
 
-        for(i = 0; i < this.row; ++i) {
+        for(i = 0; i < row; ++i) {
             System.out.print(i + 1 + " | ");
 
-            for(int j = 0; j < this.column; ++j) {
-                System.out.print(this.array[i][j] + " ");
+            for(int j = 0; j < column; ++j) {
+                System.out.print(array[i][j] + " ");
             }
 
             System.out.println();
@@ -43,14 +43,14 @@ public class Board {
     }
 
     String getCell(int i, int j) {
-        return this.array[i][j];
+        return array[i][j];
     }
 
     boolean isEmpty(int r, int c) {
-        return this.getCell(r, c).equals(" ");
+        return getCell(r, c).equals(" ");
     }
 
-    boolean isOver(int modo, Jugador.Player jugador) {
+    boolean isOver(int modo, Jugador jugador) {
         if (modo ==1){
             if(jugador.score > 0){
                 System.out.println("hola gaaaa");
@@ -58,9 +58,9 @@ public class Board {
             }
         }
         else {
-            for(int i = 0; i < this.column; ++i) {
-                for(int j = 0; j < this.row; ++j) {
-                    if (this.isEmpty(i, j)) {
+            for(int i = 0; i < column; ++i) {
+                for(int j = 0; j < row; ++j) {
+                    if (isEmpty(i, j)) {
                         return false;
                     }
                 }

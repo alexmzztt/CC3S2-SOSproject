@@ -52,15 +52,14 @@ public class Board {
     boolean gameOver(int modo, Jugador jugador) { //saber si termino el juego
         if (modo == '1') { //modo simple
             if (jugador.puntaje > 0) {
-
-                return false;
+                return true;
             }
         }
         else { //modo general
             for (int i = 0; i < column; ++i) {
                 for (int j = 0; j < row; ++j) {
                     if (isEmpty(i, j)) {
-                        return false;
+                        return true;
                     }
                 }
             }

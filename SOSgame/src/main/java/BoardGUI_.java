@@ -3,7 +3,7 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class BoardGUI extends JFrame {
+public class BoardGUI_ extends JFrame {
 
     public static int CELL_SIZE = 100;
     public static int GRID_WIDTH = 3;
@@ -29,7 +29,7 @@ public class BoardGUI extends JFrame {
     private GameBoardCanvas boardPanel;
     private SosGame game;
 
-    public BoardGUI(SosGame game) {
+    public BoardGUI_(SosGame game) {
         this.game = game;
         setContentPane(mainPanel);
         setSize(720, 540);
@@ -61,15 +61,6 @@ public class BoardGUI extends JFrame {
             }
         });
     }
-
-//    private void setContentPane(){
-//        gameBoardCanvas = new GameBoardCanvas();
-//        gameBoardCanvas.setPreferredSize(new Dimension(720, 540));
-//
-//        Container contentPane = getContentPane();
-//        contentPane.setLayout(new BorderLayout());
-//        contentPane.add(gameBoardCanvas, BorderLayout.CENTER);
-//    }
 
     class GameBoardCanvas extends JPanel {
         private int boardSize = 10;
@@ -118,7 +109,7 @@ public class BoardGUI extends JFrame {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                new BoardGUI(new SosGame());
+                new BoardGUI_(new SosGame());
             }
         });
     }

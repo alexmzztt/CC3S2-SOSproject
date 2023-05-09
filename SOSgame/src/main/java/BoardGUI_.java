@@ -38,7 +38,7 @@ public class BoardGUI_ extends JFrame {
         setVisible(true);
     }
     private void createUIComponents() {
-        // TODO: place custom component creation code here
+        // Los objetos JPanel son solo contenedores
         mainPanel = new JPanel();
         auxPanel = new JPanel();
         auxPanel.setLayout(new GridLayout(1, 1));
@@ -55,6 +55,12 @@ public class BoardGUI_ extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 try {
                     game.setBoardSize(textBoardSize.getText());
+                    game.resetGame();
+                    auxPanel.remove(boardPanel);
+                    boardPanel = new GameBoardCanvas();
+                    auxPanel.add(boardPanel);
+                    auxPanel.revalidate();
+                    auxPanel.repaint();
                 } catch(Exception exception) {
 
                 }
@@ -63,15 +69,12 @@ public class BoardGUI_ extends JFrame {
     }
 
     class GameBoardCanvas extends JPanel {
-        private int boardSize = 10;
-        private double cellSize;
-
         GameBoardCanvas(){
             //setFont(new Font());
             setResizable(false);
-            setLayout(new GridLayout(boardSize, boardSize));
-            for (int i = 0; i < 10; i++) {
-                for (int j = 0; j < 10; j++) {
+            setLayout(new GridLayout(game.getBoardSize(), game.getBoardSize()));
+            for (int i = 0; i < game.getBoardSize(); i++) {
+                for (int j = 0; j < game.getBoardSize(); j++) {
                     Button b = new Button();
                     b.setName("" + i + " " + j);
                     b.addMouseListener(new MouseAdapter() {
@@ -98,7 +101,6 @@ public class BoardGUI_ extends JFrame {
                     add(b);
                 }
             }
-
         }
         @Override
         public void paintComponent(Graphics g) {

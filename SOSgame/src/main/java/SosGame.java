@@ -30,13 +30,13 @@ public class SosGame {
     }
     private GameState currentGameState = GameState.WAITING;
 
-    public int boardSize;
+    private int boardSize = 10;
     public SosGame() {
-        grid = new Cell[boardSize][boardSize];
         initGame();
     }
 
     private void initGame() {
+        grid = new Cell[boardSize][boardSize];
         for (int row = 0; row < boardSize; ++row) {
             for (int col = 0; col < boardSize; ++col) {
                 grid[row][col] = Cell.EMPTY;
@@ -78,9 +78,11 @@ public class SosGame {
     }
 
     public void makeMove(int row, int column) {
-        if (row >= 0 && row < boardSize && column >= 0 && column < boardSize && grid[row][column] == Cell.EMPTY) {
-            grid[row][column] = Player.getMove();
-            Player.currentPlayer = (Player.currentPlayer == Player.BLUE) ? Player.RED : Player.BLUE;
+        if (row >= 0 && row < boardSize && column >= 0 && column < boardSize) {
+            if (grid[row][column] == Cell.EMPTY) {
+                grid[row][column] = Player.getMove();
+                Player.currentPlayer = (Player.currentPlayer == Player.BLUE) ? Player.RED : Player.BLUE;
+            }
             //updateGameState(Player.currentPlayer, row, column);
         }
     }

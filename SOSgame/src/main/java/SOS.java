@@ -49,9 +49,17 @@ public class SOS {
                 modo = scan.nextInt();
             }
 
+            System.out.print("Ingrese si desea jugar contra la computadora(siendo la opcion 1) o contra otro jugador(siendo la opcion 2) : ");
+            int oponente = scan.nextInt();
+            while (oponente < 1 || oponente > 2) {
+                System.out.println("Ingrese un oponente valido");
+                oponente = scan.nextInt();
+            }
+
             //configura el tablero y modo de juego
             board.IniBoard(size, size);
             check.modo = modo;
+            check.oponente = oponente;
 
             //bucle para cada turno hasta que el juego termine
             while (!board.gameOver(modo, player1)) {

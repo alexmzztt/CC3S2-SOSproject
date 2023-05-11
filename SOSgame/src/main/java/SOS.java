@@ -33,6 +33,7 @@ public class SOS {
             Board board = new Board();
             Jugador player1 = new Jugador();
             Jugador player2 = new Jugador();
+            Computadora computadora= new Computadora();
             Revisar check = new Revisar(board);
             Scanner scan = new Scanner(System.in);
             System.out.print("Ingrese el tamaño del tablero(tamaño minimo 3x3) : ");

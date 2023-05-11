@@ -71,8 +71,18 @@ public class SOS {
                     mostrarPuntaje(player1, player2);
                 }
             }
+            while (!board.gameOver(modo,player1)) {
+                Turn(player1,check);
+                mostrarPuntaje(player1,computadora);
+
+                if (!board.gameOver(modo, player1)) {
+                    Turn(computadora,check);
+                    mostrarPuntaje(player1,computadora);
+                }
+            }
 
             Winner(player1, player2);
+            Winner(player1, computadora);
         }
 
 }

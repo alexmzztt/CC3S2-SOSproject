@@ -1,6 +1,7 @@
 import java.util.Random;
 
 public class Computadora extends Jugador{
+
     public void play(Revisar check) {
         Random random = new Random();
 

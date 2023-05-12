@@ -3,68 +3,63 @@ public class Board {
     int column;
     String[][] array;
 
-    public Board() {
-    }
-
-    void IniBoard(int row, int column) {//iniciamos el tablero con el numero de filas y columnas elegido
-
+    //creamos el tablero
+    void iniBoard(int r, int c) {
+        row = r;
+        column = c;
         array = new String[row][column];
 
-        for(int i = 0; i < row; ++i) { //recorremos filas
-            for(int j = 0; j < column; ++j) { //recorremos columnas
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < column; j++) {
                 array[i][j] = " ";
             }
         }
-
     }
 
-    void printBoard() { //imprimimos tablero
+    //imprimimos el tablero
+    void printBoard() {
         System.out.print("\n  | ");
-        //imprimimos numeros de las columnas
-        int i;
-        for(i = 1; i <= row; ++i) {
-            System.out.print("" + i + " ");
+
+        for (int i = 1; i <= row; i++) {
+            System.out.print(i + " ");
         }
-
         System.out.println("\n--------------------------");
-
-        for(i = 0; i < row; ++i) {
-            System.out.print(i + 1 + " | ");
-
-            for(int j = 0; j < column; ++j) {
+        for (int i = 0; i < row; i++) {
+            System.out.print(i+1 + " | ");
+            for (int j = 0; j < column; j++) {
                 System.out.print(array[i][j] + " ");
             }
-
             System.out.println();
         }
 
         System.out.println();
     }
 
+    //obtenemos datos de la celda
     String getCell(int i, int j) {
         return array[i][j];
-    } //obtener una celda especifica
+    }
 
-    boolean isEmpty(int row, int column) {
-        return getCell(row, column).equals(" ");
-    } //saber si la celda esta vacia
+    //verificamos si esta vacia
+    boolean isEmpty(int r, int c) {
+        return getCell(r,c).equals(" ");
+    }
 
-    boolean gameOver(int modo, Jugador jugador) { //saber si termino el juego
-        if (modo == '1') { //modo simple
-            if (jugador.puntaje > 0) {
-                return true;
-            }
+    //verificar el termino del juego
+    boolean gameOver(int modo , Jugador jugador) {
+        if (modo == 1){ //si el modo es 1, o sea modo simple, entonces termina si el puntaje es mayor a 0
+            if (jugador.puntaje > 0) return true;
+            return false;
         }
-        else { //modo general
-            for (int i = 0; i < column; ++i) {
-                for (int j = 0; j < row; ++j) {
-                    if (isEmpty(i, j)) {
-                        return true;
+        else{ //si es modo 2, o sea general, termina cuando el tablero se encuentre lleno
+            for (int i = 0; i < column; i++) {
+                for (int j = 0; j < row; j++) {
+                    if (isEmpty(i,j)) { //aca revisa si hay celdas vacias
+                        return false;
                     }
                 }
             }
-
         }
-    return true;
+        return true;
     }
 }

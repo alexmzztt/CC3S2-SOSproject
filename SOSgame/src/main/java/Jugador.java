@@ -1,34 +1,40 @@
 import java.util.Scanner;
 
-    public class Jugador {
-        public static Jugador jugador;
-        public int puntaje = 0;
-        Scanner scan;
+public class Jugador{
+    int puntaje = 0;
 
-        public void Jugador () {
+    //para recepcionar
+    Scanner scan = new Scanner(System.in);
 
-            scan = new Scanner(System.in); //leer entradas
-        }
+    public void jugada(Revisar check, int modo) {
+        //pide la fila y columna
+        System.out.println("Ingrese la fila y columna");
+        //pide la fila
+        System.out.print("Fila: ");
+        int row = scan.nextInt() - 1; //recepciona el valor
 
-        public void play(Revisar check) {
-            System.out.println("Ingrese la fila y columna");
-            System.out.print("Fila: ");
-            int row = scan.nextInt() - 1; //lee la fila
-            System.out.print("Columna: ");
-            int column = scan.nextInt() - 1; //lee la columna
-            System.out.print("Ingrese la letra que desea añadir: ");
-            String letter = scan.next(); //lee la letra
-            letter = letter.toUpperCase();
-            if (!letter.equals("S") && !letter.equals("O")) { //verifica si la letra es S u O
-                System.out.println("Letra invalida");
-                play(check);
-            } else if (check.board.isEmpty(row, column)) { //verifica si la celda esta vacia, si lo esta añade la letra
-                check.board.array[row][column] = letter;
-            } else { //sino pide ingresar otra fila y columna
-                System.out.println("\nThe cell is not empty, enter other row and column numbers...\n");
-                play(check);
+        System.out.print("Columna: "); //pide la columna
+        int column = scan.nextInt() - 1; //recepciona el valor
+
+        System.out.print("Ingrese la letra: "); //pide la letra
+        String letter = scan.next(); //recepciona la letra
+
+        letter = letter.toUpperCase(); //la convierte a mayuscula
+
+        if (letter.equals("S") || letter.equals("O")) { //si la letra es S u O entra
+            if (check.board.isEmpty(row, column)) { //verifica que la celda este vacia
+                check.board.array[row][column] = letter; //si la celda esta vacia entonces la reemplaza por la letra elegida
+            } else { //si no esta vacia entonces pide ingresar otra fila y columna
+                System.out.println("\nLa celda esta ocupada, por favor igrese otra fila y columna \n");
+                jugada(check, modo);
             }
-
-            puntaje += check.Score();
+        } else { //si no es S u O muestra un mensaje de letra invalida y pide ingresar una letra nuevamente
+            System.out.println("Letra invalida");
+            jugada(check, modo);
         }
+        //puntaje
+        puntaje += check.incPuntaje(modo, this);
+
+
     }
+}

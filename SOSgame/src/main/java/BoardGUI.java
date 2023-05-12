@@ -3,7 +3,7 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class BoardGUI_ extends JFrame {
+public class BoardGUI extends JFrame {
 
     public static int CELL_SIZE = 100;
     public static int GRID_WIDTH = 3;
@@ -29,13 +29,30 @@ public class BoardGUI_ extends JFrame {
     private GameBoardCanvas boardPanel;
     private SosGame game;
 
-    public BoardGUI_(SosGame game) {
+    public BoardGUI(SosGame game) {
         this.game = game;
         setContentPane(mainPanel);
         setSize(720, 540);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("SOS Game");
         setVisible(true);
+        newGameButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                try {
+                    game.setBoardSize(textBoardSize.getText());
+                    game.resetGame();
+                    auxPanel.remove(boardPanel);
+                    boardPanel = new GameBoardCanvas();
+                    auxPanel.add(boardPanel);
+                    auxPanel.revalidate();
+                    auxPanel.repaint();
+                    JOptionPane.showMessageDialog(BoardGUI.this, game.getBoardSize());
+                } catch(Exception exception) {
+                    JOptionPane.showMessageDialog(BoardGUI.this, "Tamaño no válido");
+                }
+            }
+        });
     }
     private void createUIComponents() {
         // Los objetos JPanel son solo contenedores
@@ -48,24 +65,6 @@ public class BoardGUI_ extends JFrame {
         sRadioButtonBlue = new JRadioButton();
         sRadioButtonRed = new JRadioButton();
         textBoardSize = new JTextField();
-    }
-    private void $$$setupUI$$$ () {
-        newGameButton.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                try {
-                    game.setBoardSize(textBoardSize.getText());
-                    game.resetGame();
-                    auxPanel.remove(boardPanel);
-                    boardPanel = new GameBoardCanvas();
-                    auxPanel.add(boardPanel);
-                    auxPanel.revalidate();
-                    auxPanel.repaint();
-                } catch(Exception exception) {
-
-                }
-            }
-        });
     }
 
     class GameBoardCanvas extends JPanel {
@@ -111,7 +110,7 @@ public class BoardGUI_ extends JFrame {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                new BoardGUI_(new SosGame());
+                new BoardGUI(new SosGame());
             }
         });
     }

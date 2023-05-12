@@ -1,21 +1,26 @@
 public class SosGame {
     public enum Cell {
         EMPTY(""), S("S"), O("O");
-        private String string;
-        Cell(String name) {
-            this.string = name;
+        private String content;
+        Cell(String content) {
+            this.content = content;
         }
-        public String getString() {
-            return string;
+
+        @Override
+        public String toString() {
+            return content;
         }
     }
     private Cell[][] grid;
     public enum Player {
-        BLUE(Cell.S), RED(Cell.S);
-        Cell move;
-        static Player currentPlayer = BLUE;
+        BLUE("Red", Cell.S),
+        RED("Blue", Cell.S);
+        private String name;
+        private Cell move;
+        static private Player currentPlayer = BLUE;
 
-        Player(Cell move) {
+        Player(String name, Cell move) {
+            this.name = name;
             this.move = move;
         }
         public static Cell getMove() {
@@ -24,12 +29,15 @@ public class SosGame {
         public void setMove(Cell move) {
             currentPlayer.move = move;
         }
-    }
-    public enum GameState {
-        WAITING, PLAYING
-    }
-    private GameState currentGameState = GameState.WAITING;
+        public static Player getCurrentPlayer() {
+            return currentPlayer;
+        }
 
+        @Override
+        public String toString() {
+            return name;
+        }
+    }
     private int boardSize = 10;
     public SosGame() {
         initGame();
@@ -42,7 +50,6 @@ public class SosGame {
                 grid[row][col] = Cell.EMPTY;
             }
         }
-        currentGameState = GameState.PLAYING;
     }
 
     public void resetGame() {
@@ -63,7 +70,6 @@ public class SosGame {
         } catch (Exception e) {
             throw new IllegalArgumentException("Debe ingresar un número entero mayor o igual a tres.");
         }
-
     }
 
     public Cell getCell(int row, int column) {
@@ -74,7 +80,7 @@ public class SosGame {
         }
     }
     public String getCurrentMove() {
-        return Player.currentPlayer.move.getString();
+        return Player.currentPlayer.move.toString();
     }
 
     public void makeMove(int row, int column) {
@@ -83,15 +89,10 @@ public class SosGame {
                 grid[row][column] = Player.getMove();
                 Player.currentPlayer = (Player.currentPlayer == Player.BLUE) ? Player.RED : Player.BLUE;
             }
-            //updateGameState(Player.currentPlayer, row, column);
         }
     }
     public void setMove(Cell move) {
         Player.currentPlayer.setMove(move);
-    }
-
-    public GameState getGameState() {
-        return currentGameState;
     }
 }
 

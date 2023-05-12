@@ -24,6 +24,7 @@ public class BoardGUI extends JFrame {
     private JRadioButton oRadioButtonRed;
     private JButton newGameButton;
     private JPanel auxPanel;
+    private JLabel colorTurn;
 
     private GameBoardCanvas gameBoardCanvas;
     private GameBoardCanvas boardPanel;
@@ -47,9 +48,8 @@ public class BoardGUI extends JFrame {
                     auxPanel.add(boardPanel);
                     auxPanel.revalidate();
                     auxPanel.repaint();
-                    JOptionPane.showMessageDialog(BoardGUI.this, game.getBoardSize());
                 } catch(Exception exception) {
-                    JOptionPane.showMessageDialog(BoardGUI.this, "Tamaño no válido");
+                    JOptionPane.showMessageDialog(BoardGUI.this, exception.getMessage());
                 }
             }
         });
@@ -65,6 +65,8 @@ public class BoardGUI extends JFrame {
         sRadioButtonBlue = new JRadioButton();
         sRadioButtonRed = new JRadioButton();
         textBoardSize = new JTextField();
+        colorTurn = new JLabel();
+
     }
 
     class GameBoardCanvas extends JPanel {
@@ -83,18 +85,20 @@ public class BoardGUI extends JFrame {
                             String xy[] = b.getName().split(" ");
                             int x = Integer.parseInt(xy[0]);
                             int y = Integer.parseInt(xy[1]);
-                            game.makeMove(x, y);
+                            if (SosGame.Player.getCurrentPlayer() == SosGame.Player.BLUE) {
+                                if (sRadioButtonBlue.isSelected())
+                                    game.setMove(SosGame.Cell.S);
+                                else
+                                    game.setMove(SosGame.Cell.O);
+                            } else {
+                                if (sRadioButtonRed.isSelected())
+                                    game.setMove((SosGame.Cell.S));
+                                else
+                                    game.setMove(SosGame.Cell.O);
+                            }
+                            game.makeMove(x, y); // Actualiza el turno
+                            colorTurn.setText(SosGame.Player.getCurrentPlayer() + " turn");
                             b.setLabel(game.getCurrentMove());
-                            if (sRadioButtonBlue.isSelected()) {
-                                game.setMove(SosGame.Cell.S);
-                            } else {
-                                game.setMove(SosGame.Cell.O);
-                            }
-                            if(sRadioButtonRed.isSelected()) {
-                                game.setMove((SosGame.Cell.S));
-                            } else {
-                                game.setMove(SosGame.Cell.O);
-                            }
                         }
                     });
                     add(b);

@@ -1,27 +1,27 @@
 import java.util.Scanner;
 
 public class SOS {
-    static void showStatus(Jugador jugador1, Jugador jugador2) {
-        System.out.println("Player Score   : " + jugador1.puntaje);
-        System.out.println("Computer Score : " + jugador2.puntaje);
+    static void mostrarPuntaje(Jugador jugador1, Jugador jugador2) {
+        System.out.println("Puntaje del jugador   : " + jugador1.puntaje);
+        System.out.println("Puntaje de la computadora : " + jugador2.puntaje);
     }
 
-    static void showWinner(Jugador jugador1, Jugador jugador2) {
+    static void mostrarGanador(Jugador jugador1, Jugador jugador2) {
         if (jugador1.puntaje > jugador2.puntaje) {
-            System.out.println("Player wins!");
+            System.out.println("¡El jugador gana!");
         } else if (jugador1.puntaje < jugador2.puntaje) {
-            System.out.println("Computer wins!");
+            System.out.println("¡La computadora gana!");
         } else {
-            System.out.println("It's a draw.");
+            System.out.println("Empate.");
         }
     }
 
-    static void oneTurn(Jugador jugador, Revisar check, int modo) {
+    static void Turno(Jugador jugador, Revisar check, int modo) {
         jugador.play(check, modo);
         check.board.printBoard();
-        if (check.secondChance) {
-            check.secondChance = false;
-            oneTurn(jugador,check, modo);
+        if (check.otroTurno) {
+            check.otroTurno = false;
+            Turno(jugador,check, modo);
         }
     }
 
@@ -47,17 +47,17 @@ public class SOS {
             modo = scan.nextInt();
         }
 
-        board.setBoard(size,size);
+        board.iniBoard(size,size);
 
         while (!(board.gameOver(modo, computadora) || board.gameOver(modo, jugador))) {
-            oneTurn(jugador,check, modo);
-            showStatus(jugador,computadora);
+            Turno(jugador,check, modo);
+            mostrarPuntaje(jugador,computadora);
 
             if (!(board.gameOver(modo, computadora) || board.gameOver(modo, jugador))) {
-                oneTurn(computadora,check, modo);
-                showStatus(jugador,computadora);
+                Turno(computadora,check, modo);
+                mostrarPuntaje(jugador,computadora);
             }
         }
-        showWinner(jugador,computadora);
+        mostrarGanador(jugador,computadora);
     }
 }

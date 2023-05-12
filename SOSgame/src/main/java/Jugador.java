@@ -31,7 +31,7 @@ public class Jugador{
             play(check, modo);
         }
 
-        puntaje += check.incScore(modo, this);
+        puntaje += check.incPuntaje(modo, this);
 
 
     }

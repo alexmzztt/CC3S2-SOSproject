@@ -3,7 +3,7 @@ public class Board {
     int column;
     String[][] array;
 
-    void setBoard(int row, int column) {
+    void iniBoard(int row, int column) {
         array = new String[row][column];
 
         for (int i = 0; i < row; i++) {

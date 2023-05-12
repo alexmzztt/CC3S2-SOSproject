@@ -13,8 +13,8 @@ public class SosGame {
     }
     private Cell[][] grid;
     public enum Player {
-        BLUE("Red", Cell.S),
-        RED("Blue", Cell.S);
+        BLUE("Blue", Cell.S),
+        RED("Red", Cell.S);
         private String name;
         private Cell move;
         static private Player currentPlayer = BLUE;

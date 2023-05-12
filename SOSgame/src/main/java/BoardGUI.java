@@ -4,16 +4,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class BoardGUI extends JFrame {
-
-    public static int CELL_SIZE = 100;
-    public static int GRID_WIDTH = 3;
-
-    public static final int CELL_PADDING = CELL_SIZE / 6;
-    public static final int SYMBOL_SIZE = CELL_SIZE - CELL_PADDING * 2;
-    public static final int SYMBOL_STROKE_WIDTH = 8;
-    private int CANVAS_WIDTH;
-    private int CANVAS_HEIGHT;
-
     private JRadioButton simpleGameRadioButton;
     private JRadioButton generalGameRadioButton;
     private JPanel mainPanel;
@@ -42,15 +32,15 @@ public class BoardGUI extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 try {
                     game.setBoardSize(textBoardSize.getText());
-                    game.resetGame();
-                    auxPanel.remove(boardPanel);
-                    boardPanel = new GameBoardCanvas();
-                    auxPanel.add(boardPanel);
-                    auxPanel.revalidate();
-                    auxPanel.repaint();
                 } catch(Exception exception) {
                     JOptionPane.showMessageDialog(BoardGUI.this, exception.getMessage());
                 }
+                game.resetGame();
+                auxPanel.remove(boardPanel);
+                boardPanel = new GameBoardCanvas();
+                auxPanel.add(boardPanel);
+                auxPanel.revalidate();
+                auxPanel.repaint();
             }
         });
     }

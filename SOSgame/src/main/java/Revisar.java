@@ -3,6 +3,7 @@ public class Revisar {
     boolean secondChance = false; //si se tiene una segunda oportunidad
     int cantSOS = 0; //cantidad de SOS
     public int modo;
+    public int oponente;
     public Revisar(Board board) {
         board = board;
     }

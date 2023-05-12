@@ -33,6 +33,7 @@ public class SOS {
             Board board = new Board();
             Jugador player1 = new Jugador();
             Jugador player2 = new Jugador();
+            Computadora computadora= new Computadora();
             Revisar check = new Revisar(board);
             Scanner scan = new Scanner(System.in);
             System.out.print("Ingrese el tamaño del tablero(tamaño minimo 3x3) : ");
@@ -49,9 +50,17 @@ public class SOS {
                 modo = scan.nextInt();
             }
 
+            System.out.print("Ingrese si desea jugar contra la computadora(siendo la opcion 1) o contra otro jugador(siendo la opcion 2) : ");
+            int oponente = scan.nextInt();
+            while (oponente < 1 || oponente > 2) {
+                System.out.println("Ingrese un oponente valido");
+                oponente = scan.nextInt();
+            }
+
             //configura el tablero y modo de juego
             board.IniBoard(size, size);
             check.modo = modo;
+            check.oponente = oponente;
 
             //bucle para cada turno hasta que el juego termine
             while (!board.gameOver(modo, player1)) {
@@ -62,8 +71,18 @@ public class SOS {
                     mostrarPuntaje(player1, player2);
                 }
             }
+            while (!board.gameOver(modo,player1)) {
+                Turn(player1,check);
+                mostrarPuntaje(player1,computadora);
+
+                if (!board.gameOver(modo, player1)) {
+                    Turn(computadora,check);
+                    mostrarPuntaje(player1,computadora);
+                }
+            }
 
             Winner(player1, player2);
+            Winner(player1, computadora);
         }
 
 }

@@ -4,7 +4,9 @@ public class Board {
     String[][] array;
 
     //creamos el tablero
-    void iniBoard(int row, int column) {
+    void iniBoard(int r, int c) {
+        row = r;
+        column = c;
         array = new String[row][column];
 
         for (int i = 0; i < row; i++) {
@@ -39,8 +41,8 @@ public class Board {
     }
 
     //verificamos si esta vacia
-    boolean isEmpty(int row, int column) {
-        return getCell(row,column).equals(" ");
+    boolean isEmpty(int r, int c) {
+        return getCell(r,c).equals(" ");
     }
 
     //verificar el termino del juego

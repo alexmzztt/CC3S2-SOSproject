@@ -3,6 +3,7 @@ public class Board {
     int column;
     String[][] array;
 
+    //creamos el tablero
     void iniBoard(int row, int column) {
         array = new String[row][column];
 
@@ -13,6 +14,7 @@ public class Board {
         }
     }
 
+    //imprimimos el tablero
     void printBoard() {
         System.out.print("\n  | ");
 
@@ -31,23 +33,26 @@ public class Board {
         System.out.println();
     }
 
+    //obtenemos datos de la celda
     String getCell(int i, int j) {
         return array[i][j];
     }
 
+    //verificamos si esta vacia
     boolean isEmpty(int row, int column) {
         return getCell(row,column).equals(" ");
     }
 
+    //verificar el termino del juego
     boolean gameOver(int modo , Jugador jugador) {
-        if (modo == 1){
+        if (modo == 1){ //si el modo es 1, o sea modo simple, entonces termina si el puntaje es mayor a 0
             if (jugador.puntaje > 0) return true;
             return false;
         }
-        else{
+        else{ //si es modo 2, o sea general, termina cuando el tablero se encuentre lleno
             for (int i = 0; i < column; i++) {
                 for (int j = 0; j < row; j++) {
-                    if (isEmpty(i,j)) {
+                    if (isEmpty(i,j)) { //aca revisa si hay celdas vacias
                         return false;
                     }
                 }

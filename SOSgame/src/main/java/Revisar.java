@@ -1,12 +1,13 @@
 public class Revisar {
     Board board;
-    boolean otroTurno = false;
-    int cantSOS = 0;
+    boolean otroTurno = false; //jugar otro turno al realizar un SOS
+    int cantSOS = 0; //cantidad de SOS
 
     public Revisar (Board board) {
         this.board = board;
     }
 
+    //revisa si se realizo un SOS horizontal
     int SOShorizontal(int count) {
         for (int i = 0; i < board.column - 2; i++) {
             for (int j = 0; j < board.row - 1; j++) {
@@ -18,6 +19,7 @@ public class Revisar {
         return count;
     }
 
+    //revisa si se realizo un SOS vertical
     int SOSvertical(int count) {
         for (int i = 0; i < board.column - 1; i++) {
             for (int j = 0; j < board.row - 2; j++) {
@@ -29,6 +31,7 @@ public class Revisar {
         return count;
     }
 
+    //revisa si se realizo un SOS diagonal
     int SOSdiagonal(int count) {
         for (int i = 0; i < board.column - 2; i++) {
             for (int j = 0; j < board.row - 2; j++) {
@@ -49,10 +52,11 @@ public class Revisar {
         return count;
     }
 
-    int incPuntaje(int modo, Jugador jugador) {
-        int count = 0;
-        int puntaje = 0;
+    int incPuntaje(int modo, Jugador jugador) { //suma el puntaje
+        int count = 0; //contador
+        int puntaje = 0; //puntaje
 
+        //suma los contadores
         count = SOShorizontal(count);
         count = SOSvertical(count);
         count = SOSdiagonal(count);

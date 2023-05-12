@@ -2,6 +2,4 @@
 
 ## Videos
 
-[Parte 1]()
-
-[Parte 2](/Sprint%204/parte2.mp4)
+En esta [carpeta](https://drive.google.com/drive/folders/1GLAgpvcsXg8KQuXVB6PIPL07kVE4Dee9) de Google Drive compartimos los videos del avance de cada integrante.

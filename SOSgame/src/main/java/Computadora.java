@@ -1,8 +1,7 @@
 import java.util.Random;
 
 public class Computadora extends Jugador{
-
-    public void play(Revisar check) {
+    public void play(Revisar check, int modo) {
         Random random = new Random();
 
         int row = random.nextInt(check.board.row);
@@ -16,9 +15,9 @@ public class Computadora extends Jugador{
                 check.board.array[row][column] = "O";
             }
         } else {
-            play(check);
+            play(check, modo);
         }
 
-        puntaje += check.Score();
+        puntaje += check.incScore(modo, this);
     }
 }
